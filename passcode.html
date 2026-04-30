@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passcode</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    width: 100%;
+    background: #5BC8DC;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Subtle bubble texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.12) 0%, transparent 40%),
+      radial-gradient(circle at 80% 75%, rgba(255,255,255,0.10) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 14px 24px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: background 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  nav a:hover { background: rgba(255,255,255,0.2); }
+  nav a.active { background: rgba(255,255,255,0.3); }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(40px, 8vw, 120px);
+    padding: 40px 60px;
+    flex-wrap: wrap;
+  }
+
+  /* LEFT — photo + decorations */
+  .left-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .polaroid-wrap {
+    position: relative;
+    display: inline-block;
+    margin-top: 24px;
+  }
+
+  .bow {
+    position: absolute;
+    top: -38px;
+    right: -18px;
+    width: 70px;
+    z-index: 2;
+  }
+
+  .polaroid {
+    background: white;
+    padding: 12px 12px 38px;
+    border-radius: 3px;
+    box-shadow: 4px 6px 20px rgba(0,0,0,0.18);
+    transform: rotate(-2.5deg);
+    width: clamp(200px, 22vw, 280px);
+  }
+
+  .polaroid-img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 2px;
+    background: #b8d4e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    overflow: hidden;
+  }
+
+  .bear-wrap {
+    margin-top: 18px;
+    width: clamp(90px, 10vw, 130px);
+  }
+
+  /* SVG Bear */
+  .bear-svg { width: 100%; height: auto; }
+
+  /* RIGHT — passcode */
+  .right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .pc-title {
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .pc-display {
+    display: flex;
+    gap: 10px;
+  }
+
+  .pc-slot {
+    width: clamp(50px, 5.5vw, 64px);
+    height: clamp(50px, 5.5vw, 64px);
+    background: rgba(255,255,255,0.28);
+    border: 2.5px solid rgba(255,255,255,0.55);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: white;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+
+  .pc-slot.filled {
+    background: white;
+    color: #5BC8DC;
+    border-color: white;
+    transform: scale(1.05);
+  }
+
+  .keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .key {
+    width: clamp(64px, 7vw, 82px);
+    height: clamp(64px, 7vw, 82px);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.88);
+    border: none;
+    cursor: pointer;
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 800;
+    color: #4a9db5;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s, background 0.15s, box-shadow 0.15s;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .key::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0);
+    transition: background 0.15s;
+  }
+
+  .key:hover {
+    background: white;
+    transform: scale(1.08);
+    box-shadow: 0 5px 16px rgba(0,0,0,0.18);
+  }
+
+  .key:active {
+    transform: scale(0.93);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+  }
+
+  .key.sym { font-size: clamp(16px, 1.8vw, 22px); }
+
+  .msg {
+    min-height: 24px;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.3px;
+    text-align: center;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  }
+
+  /* Animations */
+  @keyframes shake {
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-10px)}
+    40%{transform:translateX(10px)}
+    60%{transform:translateX(-8px)}
+    80%{transform:translateX(8px)}
+  }
+
+  @keyframes pop {
+    0%{transform:scale(1)} 50%{transform:scale(1.15)} 100%{transform:scale(1.05)}
+  }
+
+  .shake { animation: shake 0.4s ease; }
+  .pop { animation: pop 0.25s ease; }
+
+  /* Floating bubbles decoration */
+  .bubbles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0%{transform:translateY(100vh) scale(0.8); opacity:0}
+    10%{opacity:1}
+    90%{opacity:0.5}
+    100%{transform:translateY(-120px) scale(1); opacity:0}
+  }
+
+  /* Status bar url */
+  .urlbar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    padding: 5px 14px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    z-index: 20;
+  }
+</style>
+</head>
+<body>
+
+<div class="bubbles" id="bubbles"></div>
+
+<nav>
+  <a href="#" class="active">passcode</a>
+  <a href="#">passcode 2</a>
+  <a href="#">passcode 4</a>
+  <a href="#">passcode 4</a>
+  <a href="#">passcode 2</a>
+  <a href="#">Page 6</a>
+  <a href="#">Page 7</a>
+  <a href="#">Page 8</a>
+  <a href="#">Page 9</a>
+  <a href="#">Page 10</a>
+  <a href="#">Page 11</a>
+</nav>
+
+<main>
+  <!-- LEFT -->
+  <div class="left-section">
+    <div class="polaroid-wrap">
+      <!-- Bow SVG -->
+      <svg class="bow" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="35" cy="40" rx="32" ry="22" fill="#a8dff0" transform="rotate(-20 35 40)"/>
+        <ellipse cx="85" cy="40" rx="32" ry="22" fill="#a8dff0" transform="rotate(20 85 40)"/>
+        <ellipse cx="35" cy="40" rx="18" ry="13" fill="#c2eaf6" transform="rotate(-20 35 40)"/>
+        <ellipse cx="85" cy="40" rx="18" ry="13" fill="#c2eaf6" transform="rotate(20 85 40)"/>
+        <circle cx="60" cy="40" r="12" fill="#87d4ec"/>
+        <circle cx="60" cy="40" r="6" fill="#a8dff0"/>
+      </svg>
+
+      <div class="polaroid">
+        <div class="polaroid-img">
+          <!-- placeholder couple emoji -->
+          <span style="font-size:clamp(48px,6vw,72px)">🫶</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bear SVG -->
+    <div class="bear-wrap">
+      <svg class="bear-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+        <!-- Ears -->
+        <circle cx="55" cy="65" r="28" fill="#e8f6fa"/>
+        <circle cx="145" cy="65" r="28" fill="#e8f6fa"/>
+        <circle cx="55" cy="65" r="16" fill="#c9ecf5"/>
+        <circle cx="145" cy="65" r="16" fill="#c9ecf5"/>
+        <!-- Body -->
+        <ellipse cx="100" cy="175" rx="68" ry="72" fill="#e8f6fa"/>
+        <!-- Head -->
+        <circle cx="100" cy="100" r="62" fill="#e8f6fa"/>
+        <!-- Face -->
+        <circle cx="80" cy="95" r="8" fill="#5bc8dc"/>
+        <circle cx="120" cy="95" r="8" fill="#5bc8dc"/>
+        <circle cx="82" cy="93" r="3" fill="white"/>
+        <circle cx="122" cy="93" r="3" fill="white"/>
+        <!-- Nose -->
+        <ellipse cx="100" cy="112" rx="10" ry="7" fill="#a0d8e8"/>
+        <!-- Mouth -->
+        <path d="M90 120 Q100 130 110 120" stroke="#88c8d8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- Tummy -->
+        <ellipse cx="100" cy="178" rx="40" ry="44" fill="#cceef7"/>
+        <!-- Bowtie -->
+        <polygon points="78,210 100,222 78,234" fill="#f4a7c0"/>
+        <polygon points="122,210 100,222 122,234" fill="#f4a7c0"/>
+        <circle cx="100" cy="222" r="6" fill="#e8789a"/>
+        <!-- Hat -->
+        <rect x="72" y="42" width="56" height="10" rx="5" fill="#88c8d8"/>
+        <rect x="82" y="14" width="36" height="32" rx="6" fill="#a8dff0"/>
+        <rect x="85" y="36" width="30" height="6" rx="3" fill="#c2eaf6"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right-section">
+    <div class="pc-title">Entre a passcode</div>
+
+    <div class="pc-display" id="display">
+      <div class="pc-slot" id="s0">✱</div>
+      <div class="pc-slot" id="s1">✱</div>
+      <div class="pc-slot" id="s2">✱</div>
+      <div class="pc-slot" id="s3">✱</div>
+    </div>
+
+    <div class="keypad">
+      <button class="key" onclick="press('1')">1</button>
+      <button class="key" onclick="press('2')">2</button>
+      <button class="key" onclick="press('3')">3</button>
+      <button class="key" onclick="press('4')">4</button>
+      <button class="key" onclick="press('5')">5</button>
+      <button class="key" onclick="press('6')">6</button>
+      <button class="key" onclick="press('7')">7</button>
+      <button class="key" onclick="press('8')">8</button>
+      <button class="key" onclick="press('9')">9</button>
+      <button class="key sym" onclick="press('*')">✱</button>
+      <button class="key" onclick="press('0')">0</button>
+      <button class="key sym" onclick="press('#')">#</button>
+    </div>
+
+    <div class="msg" id="msg"></div>
+  </div>
+</main>
+
+<div class="urlbar">https://yogicshifu.my.canva.site/copy-of-1/#page-0</div>
+
+<script>
+  // Floating bubbles
+  const bc = document.getElementById('bubbles');
+  for (let i = 0; i < 14; i++) {
+    const b = document.createElement('div');
+    b.className = 'bubble';
+    const size = 20 + Math.random() * 60;
+    b.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      animation-duration:${10 + Math.random()*16}s;
+      animation-delay:${Math.random()*12}s;
+    `;
+    bc.appendChild(b);
+  }
+
+  let code = '';
+  const SECRET = '1234';
+
+  function press(val) {
+    if (code.length >= 4) return;
+    code += val;
+    const slot = document.getElementById('s' + (code.length - 1));
+    slot.textContent = val;
+    slot.classList.add('filled', 'pop');
+    setTimeout(() => slot.classList.remove('pop'), 250);
+    if (code.length === 4) setTimeout(check, 350);
+  }
+
+  function check() {
+    const msg = document.getElementById('msg');
+    if (code === SECRET) {
+      msg.textContent = '💖 Correct! Welcome!';
+    } else {
+      msg.textContent = '❌ Wrong passcode, try again!';
+      document.getElementById('display').classList.add('shake');
+      setTimeout(() => document.getElementById('display').classList.remove('shake'), 400);
+    }
+    setTimeout(reset, 1400);
+  }
+
+  function reset() {
+    code = '';
+    for (let i = 0; i < 4; i++) {
+      const s = document.getElementById('s' + i);
+      s.textContent = '✱';
+      s.classList.remove('filled');
+    }
+    document.getElementById('msg').textContent = '';
+  }
+</script>
+</body>
+</html>
