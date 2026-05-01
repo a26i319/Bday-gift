@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passcode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/css/styles.css">
+</head>
+<body>
+<div class="screen active" id="screen-passcode">
+  <!-- Floating bubbles -->
+  <div class="bubbles" id="bubbles"></div>
+
+  <!-- Nav -->
+  <nav class="pc-nav">
+    <a href="#" class="active">passcode</a>
+    <a href="#">greeting</a>
+    <a href="#">choice</a>
+    <a href="#">gifts</a>
+    <a href="#">cake</a>
+    <a href="#">miss us</a>
+    <a href="#">letter</a>
+  </nav>
+
+  <main class="pc-main">
+    <!-- LEFT -->
+    <div class="pc-left">
+      <div class="polaroid-wrap">
+        <!-- Bow SVG -->
+        <svg class="bow-svg" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="35" cy="40" rx="32" ry="22" fill="#ffd6e7" transform="rotate(-20 35 40)"/>
+          <ellipse cx="85" cy="40" rx="32" ry="22" fill="#ffd6e7" transform="rotate(20 85 40)"/>
+          <ellipse cx="35" cy="40" rx="18" ry="13" fill="#ffe8f2" transform="rotate(-20 35 40)"/>
+          <ellipse cx="85" cy="40" rx="18" ry="13" fill="#ffe8f2" transform="rotate(20 85 40)"/>
+          <circle cx="60" cy="40" r="12" fill="#ffb3cf"/>
+          <circle cx="60" cy="40" r="6" fill="#ffd6e7"/>
+        </svg>
+        <div class="polaroid">
+          <div class="polaroid-img">
+            <img src="./src/img/cutie-pie.jpg" alt="Polaroid Image">
+          </div>
+        </div>
+      </div>
+
+      <!-- Bear SVG -->
+      <div class="bear-wrap">
+        <svg class="bear-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="55" cy="65" r="28" fill="#fff0f5"/>
+          <circle cx="145" cy="65" r="28" fill="#fff0f5"/>
+          <circle cx="55" cy="65" r="16" fill="#ffe8f2"/>
+          <circle cx="145" cy="65" r="16" fill="#ffe8f2"/>
+          <ellipse cx="100" cy="175" rx="68" ry="72" fill="#fff0f5"/>
+          <circle cx="100" cy="100" r="62" fill="#fff0f5"/>
+          <circle cx="80" cy="95" r="8" fill="#ff97b7"/>
+          <circle cx="120" cy="95" r="8" fill="#ff97b7"/>
+          <circle cx="82" cy="93" r="3" fill="white"/>
+          <circle cx="122" cy="93" r="3" fill="white"/>
+          <ellipse cx="100" cy="112" rx="10" ry="7" fill="#ffb3cf"/>
+          <path d="M90 120 Q100 130 110 120" stroke="#ff97b7" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="100" cy="178" rx="40" ry="44" fill="#ffe8f2"/>
+          <polygon points="78,210 100,222 78,234" fill="#f4a7c0"/>
+          <polygon points="122,210 100,222 122,234" fill="#f4a7c0"/>
+          <circle cx="100" cy="222" r="6" fill="#e8789a"/>
+          <rect x="72" y="42" width="56" height="10" rx="5" fill="#ff97b7"/>
+          <rect x="82" y="14" width="36" height="32" rx="6" fill="#ffd6e7"/>
+          <rect x="85" y="36" width="30" height="6" rx="3" fill="#ffe8f2"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Right section -->
+     <div class="pc-right">
+      <div class="pc-title">Entre a passcode</div>
+      <div class="pc-hint">hint: our birth year!!</div>
+      <div class="pc-display" id="passcode-display">
+        <div class="pc-slot" id="dot-0">✱</div>
+        <div class="pc-slot" id="dot-1">✱</div>
+        <div class="pc-slot" id="dot-2">✱</div>
+        <div class="pc-slot" id="dot-3">✱</div>
+      </div>
+      <div class="keypad" id="keypad">
+        <button class="key" onclick="pressKey('1')">1</button>
+        <button class="key" onclick="pressKey('2')">2</button>
+        <button class="key" onclick="pressKey('3')">3</button>
+        <button class="key" onclick="pressKey('4')">4</button>
+        <button class="key" onclick="pressKey('5')">5</button>
+        <button class="key" onclick="pressKey('6')">6</button>
+        <button class="key" onclick="pressKey('7')">7</button>
+        <button class="key" onclick="pressKey('8')">8</button>
+        <button class="key" onclick="pressKey('9')">9</button>
+        <button class="key sym" onclick="pressKey('*')">✱</button>
+        <button class="key" onclick="pressKey('0')">0</button>
+        <button class="key sym" onclick="clearLast()">⌫</button>
+      </div>
+      <div class="pc-msg" id="pc-msg"></div>
+      <!-- NEXT button: hidden until correct passcode, then appears with animation -->
+      <button class="pc-next-btn" id="pc-next" onclick="goTo('screen-greeting')">Next →</button>
+    </div>
+<script src="./src/js/app.js"></script> 
+</body>
+
+</html>
