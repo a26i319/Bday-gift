@@ -85,3 +85,31 @@ function goTo(id) {
     }
   }, 50);
 }
+
+
+
+// MUSIC CONTROL
+let musicPlaying = false;
+const audio = document.getElementById('bg-music');
+audio.volume = 0.25;
+
+function toggleMusic() {
+  if (musicPlaying) {
+    audio.pause();
+    document.getElementById('music-btn').textContent = '🔇';
+    musicPlaying = false;
+  } else {
+    audio.play().catch(() => showToast('Tap again to play music 🎵'));
+    document.getElementById('music-btn').textContent = '🎵';
+    musicPlaying = true;
+  }
+}
+
+document.addEventListener('click', () => {
+  if (!musicPlaying) {
+    audio.play().then(() => {
+      musicPlaying = true;
+      document.getElementById('music-btn').textContent = '🎵';
+    }).catch(() => {});
+  }
+}, { once: true });
