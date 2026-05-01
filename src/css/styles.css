@@ -46,7 +46,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 #screen-passcode::before {
@@ -308,6 +308,16 @@ body {
   0%{ transform: scale(1); }
   50%{ transform: scale(1.15); }
   100%{ transform: scale(1.05); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.3) rotate(-5deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
 }
 
 .shake { animation: shake 0.4s ease; }

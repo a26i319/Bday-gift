@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passcode</title>
+    <title>Surprise Gift!!!</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./src/css/styles.css">
 </head>
 <body>
+
+    <!-- SCREEN: Passcode -->
 <div class="screen active" id="screen-passcode">
   <!-- Floating bubbles -->
   <div class="bubbles" id="bubbles"></div>
@@ -70,7 +72,7 @@
     </div>
 
     <!-- Right section -->
-     <div class="pc-right">
+        <div class="pc-right">
       <div class="pc-title">Entre a passcode</div>
       <div class="pc-hint">hint: our birth year!!</div>
       <div class="pc-display" id="passcode-display">
@@ -92,11 +94,28 @@
         <button class="key sym" onclick="pressKey('*')">✱</button>
         <button class="key" onclick="pressKey('0')">0</button>
         <button class="key sym" onclick="clearLast()">⌫</button>
-      </div>
+        </div>
       <div class="pc-msg" id="pc-msg"></div>
       <!-- NEXT button: hidden until correct passcode, then appears with animation -->
       <button class="pc-next-btn" id="pc-next" onclick="goTo('screen-greeting')">Next →</button>
     </div>
+    </main>
+</div>
+
+<!-- SCREEN: Greeting -->
+<div class="screen" id="screen-greeting">
+  <div class="greeting-content">
+    <div class="balloons">
+      <div class="balloon">🎈</div>
+      <div class="balloon">🎈</div>
+      <div class="balloon">🎈</div>
+    </div>
+    <div class="hb-title">🎉 Happy Birthday! 🎉</div>
+    <div class="characters">🐻🐰</div>
+    <div class="cake-big">🎂</div>
+    <button class="btn-main btn-blue" onclick="goTo('screen-choice')">Continue →</button>
+  </div>
+</div>
 <script src="./src/js/app.js"></script> 
 </body>
 
