@@ -113,3 +113,15 @@ document.addEventListener('click', () => {
     }).catch(() => {});
   }
 }, { once: true });
+
+let noCount = 0;
+function clickNo(){
+  noCount++;
+  if (noCount === 1) {
+    goTo('screen-dare');
+
+  }else{
+    noCount = 0;
+    goTo('screen-superdare');
+  }
+}

@@ -122,6 +122,37 @@
   </div>
 </div>
 
+<!-- SCREEN: CHOICE -->
+<div class="screen" id="screen-choice">
+    <div class="choice-content">
+      <div class="choice-title">Are You Ready?<br>For a Surprise? 🎀</div>
+      <img src="./src/img/choice.gif" alt="cute bear" class="choice-gif">
+      <div class="choice-buttons">
+        <button class="btn-choice btn-yes" onclick="goTo('screen-gifts')">YES!! ❤️</button>
+        <button class="btn-choice btn-no" onclick="clickNo()">NO!!</button>
+      </div>
+    </div>
+</div>
+
+<!-- SCREEN: DARE(first NO) -->
+<div class="screen" id="screen-dare">
+  <div class="dare-content">
+    <div class="dare-title">HOW DARE YOU!</div>
+    <img src="./src/img/angry.gif" alt="angry" class="dare-gif">
+    <button class="btn-choice btn-tryagain" onclick="goTo('screen-choice')">TRY AGAIN</button>
+  </div>
+</div>
+
+<!-- SCREEN: SUPER DARE(second NO) -->
+<div class="screen" id="screen-superdare">
+    <div class="dare-content">
+      <div class="dare-title" style="color: #c0392b;">ARE YOU REALLY SERIOUS?😾</div>
+      <img src="./src/img/sp-angry.gif" alt="very angry" class="dare-gif">
+    <p class="dare-subtitle">You better click YES this time!!</p>
+    <button class="btn-choice btn-tryagain" onclick="goTo('screen-choice')">TRY AGAIN</button>
+    </div>
+</div>
+
 <!-- Music button -->
 <button class="music-btn" id="music-btn" onclick="toggleMusic()" title="Toggle music">🎵</button>
 <div class="toast" id="toast"></div>
