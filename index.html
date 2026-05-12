@@ -153,9 +153,31 @@
     </div>
 </div>
 
+
 <!-- Music button -->
 <button class="music-btn" id="music-btn" onclick="toggleMusic()" title="Toggle music">🎵</button>
 <div class="toast" id="toast"></div>
+<!-- SCREEN: GIFTS -->
+
+<div class="screen" id="screen-gifts">
+  <div class="gifts-content">
+    <div class="gifts-title" id="gifts-title">
+    </div>
+    <div class="gifts-subtitle" id="gifts-subtitle"></div>
+    <div class="gift-boxes" id="gift-boxes">
+      <div class="gift-box" id="box-0" onclick="openGift(0)" >
+        <img>
+      </div>
+      <div class="gift-box" id="box-1" onclick="openGift(1)" >
+        <img>
+      </div>
+      <div class="gift-box" id="box-2" onclick="openGift(2)" >
+        <img>
+      </div>
+    </div>
+    <div class="gift-reveal" id="gift-reveal"></div>
+  </div>
+</div>
 
 <!-- Background music -->
 <audio id="bg-music" loop>
