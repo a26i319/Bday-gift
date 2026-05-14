@@ -539,3 +539,109 @@ body {
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(212,95,138,0.5);
 }
+
+/* =======GIFTS======= */
+#screen-gifts{
+  background: linear-gradient(160deg, #fff0f5 0%, #ffd6e7 100%);
+}
+.gifts-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.gifts-title{
+  font-size: clamp(32px, 7vw, 60px);
+  font-weight: 900;
+  color: #f62270;
+  letter-spacing: 2px;
+  min-height: 70px;
+}
+.gifts-subtitle{
+  font-size: clamp(16px, 3vw, 22px);
+  font-weight: 600;
+  color: #c0392b;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  min-height: 30px;
+}
+.gifts-subtitle.visible{
+  opacity: 1;
+}
+.gift-boxes {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(80px);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gift-boxes.slide-up{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gift-box{
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.gift-box:hover{
+  transform: scale(1.1) rotate(3deg);
+  filter: drop-shadow(0 10px 20px rgba(219, 20, 143, 0.5));
+
+}
+
+.gift-box.opened{
+  pointer-events: none;
+  filter: grayscale(0.5);
+  transform: scale(0.9);
+
+}
+
+.gift-img {
+  width: clamp(100px, 20vw, 160px);
+  height: clamp(100px, 20vw, 160px);
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: multiply;
+  animation: floatGift 2.5s ease-in-out infinite;
+}
+.gift-box:nth-child(1) .gift-img{
+  animation-delay: 0.4s;
+}
+.gift-box:nth-child(2) .gift-img{
+  animation-delay: 0.8s;
+}
+.gift-box:nth-child(3) .gift-img{
+  animation-delay: 1.2s;
+}
+
+@keyframes floatGift {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.gift-reveal{
+  background: var(--pink);
+  border-radius: 20px;
+  padding: 20px 30px;
+  box-shadow: 0 8px 25px rgba(91,184,245,0.3);
+  font-size: clamp(16px, 3vw, 20px);
+  color: #dfe6e7;
+  font-weight: 700;
+  max-width: 360px;
+  min-height: 60px;
+  display: none;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  line-height: 1.5;
+}
+.gift-reveal.visible{
+  display: block;
+}

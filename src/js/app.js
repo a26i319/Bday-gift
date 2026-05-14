@@ -74,6 +74,7 @@ function goTo(id) {
     const target = document.getElementById(id);
     if (target) target.classList.add('active');
     if (id === 'screen-miss') setupKissBackground();
+    if (id === 'screen-gifts') startGiftsScreen();
     // Reset passcode state when going back to start
     if (id === 'screen-passcode') {
       entered = '';
@@ -124,4 +125,55 @@ function clickNo(){
     noCount = 0;
     goTo('screen-superdare');
   }
+}
+
+// GIFTS
+// GIFTS
+const giftMessages = [
+  '💙 Gift 1: My whole heart — every single day, forever 💙',
+  '🌟 Gift 2: A promise to always make you smile, no matter what 🌟',
+  '🎵 Gift 3: Every song that reminded me of you — our playlist forever 🎵'
+];
+
+function openGift(idx) {
+  const box = document.getElementById('box-' + idx);
+  if (box.classList.contains('opened')) return;
+  box.classList.add('opened');
+  const reveal = document.getElementById('gift-reveal');
+  reveal.textContent = giftMessages[idx];
+  reveal.classList.add('visible');
+}
+
+function startGiftsScreen() {
+  // reset state
+  document.getElementById('gifts-title').textContent = '';
+  const subtitle = document.getElementById('gifts-subtitle');
+  subtitle.classList.remove('visible');
+  const boxes = document.getElementById('gift-boxes');
+  boxes.classList.remove('slide-up');
+  document.getElementById('gift-reveal').classList.remove('visible');
+  document.querySelectorAll('.gift-box').forEach(b => b.classList.remove('opened'));
+
+  // type out title letter by letter
+  const title = '🎁 Gift for you';
+  let i = 0;
+  const titleEl = document.getElementById('gifts-title');
+  titleEl.textContent = '';
+
+  const typeInterval = setInterval(() => {
+    titleEl.textContent += title[i];
+    i++;
+    if (i >= title.length) {
+      clearInterval(typeInterval);
+      // show subtitle
+      setTimeout(() => {
+        subtitle.textContent = 'click any gift to open 🎀';
+        subtitle.classList.add('visible');
+        // slide up boxes
+        setTimeout(() => {
+          boxes.classList.add('slide-up');
+        }, 300);
+      }, 300);
+    }
+  }, 80);
 }
