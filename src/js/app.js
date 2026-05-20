@@ -75,6 +75,7 @@ function goTo(id) {
     if (target) target.classList.add('active');
     if (id === 'screen-miss') setupKissBackground();
     if (id === 'screen-gifts') startGiftsScreen();
+    if (id === 'screen-photo-gallery') initPhotoGallery();
     // Reset passcode state when going back to start
     if (id === 'screen-passcode') {
       entered = '';
@@ -85,6 +86,19 @@ function goTo(id) {
       if (nextBtn) nextBtn.classList.remove('visible');
     }
   }, 50);
+}
+
+function initPhotoGallery() {
+  // Initialize gallery frame click handlers
+  document.querySelectorAll('.collage-frame').forEach((frame, i) => {
+    frame.removeEventListener('click', handleFrameClick);
+    frame.addEventListener('click', handleFrameClick);
+  });
+}
+
+function handleFrameClick(e) {
+  const index = parseInt(e.currentTarget.dataset.index);
+  openPhotoModal(index);
 }
 
 
@@ -131,7 +145,7 @@ function clickNo(){
 // GIFTS
 const giftMessages = [
   '🎂 Opening the cake room... make a wish!!',
-  '💙 Gift 2: My whole heart — every single day, forever 💙',
+  '📸 Gift 2: Opening our memory collage...',
   '🌟 Gift 3: A promise to always make you smile, no matter what 🌟'
 ];
 
@@ -141,6 +155,10 @@ function openGift(idx) {
   box.classList.add('opened');
   if (idx === 0) {
     setTimeout(() => goTo('screen-cake'), 400);
+    return;
+  }
+  if (idx === 1) {
+    setTimeout(() => goTo('screen-photo-gallery'), 600);
     return;
   }
   const reveal = document.getElementById('gift-reveal');
@@ -268,3 +286,51 @@ function launchConfetti() {
     container.appendChild(c);
   }
 }
+
+// PHOTO GALLERY
+const photoData = [
+  { label: 'bestie moments', src: './src/img/cutie-pie.jpg' },
+  { label: 'late night memories', src: './src/img/choice.gif' },
+  { label: 'film dump', src: './src/img/cutie-pie.jpg' },
+  { label: 'girls day', src: './src/img/choice.gif' },
+  { label: 'summer vibes', src: './src/img/cutie-pie.jpg' },
+  { label: 'precious times', src: './src/img/choice.gif' }
+];
+
+function openPhotoModal(index) {
+  const modal = document.getElementById('photo-modal');
+  const photo = document.getElementById('modal-photo');
+  const caption = document.getElementById('modal-caption');
+
+  if (photoData[index]) {
+    photo.src = photoData[index].src;
+    caption.textContent = photoData[index].label;
+    modal.classList.add('visible');
+  }
+}
+
+function closePhotoModal() {
+  const modal = document.getElementById('photo-modal');
+  modal.classList.remove('visible');
+}
+
+// Close modal on outside click
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('photo-modal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closePhotoModal();
+    });
+  }
+
+  // Add click handlers to gallery frames
+  document.querySelectorAll('.collage-frame').forEach((frame, i) => {
+    frame.addEventListener('click', () => openPhotoModal(i));
+  });
+
+  // Esc key to close modal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePhotoModal();
+  });
+});
+
