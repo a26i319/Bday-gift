@@ -185,6 +185,7 @@ function startCakeScreen() {
   document.getElementById('blow-btn').classList.remove('hidden');
   document.getElementById('wish-msg').classList.remove('visible');
   document.getElementById('wish-msg').textContent = '';
+  document.getElementById('btn-back-cake').classList.add('hidden');
   document.getElementById('confetti-container').innerHTML = '';
 
   // spawn stars
@@ -222,8 +223,9 @@ function blowCandles() {
   setTimeout(() => {
     document.getElementById('blow-btn').classList.add('hidden');
     const msg = document.getElementById('wish-msg');
-    msg.textContent = '🎉 Happy Birthday my love! 🎂💙';
+    msg.textContent = '🎉 Happy Birthday Shoon!!! 🎂';
     msg.classList.add('visible');
+    document.getElementById('btn-back-cake').classList.remove('hidden');
     launchConfetti();
   }, flames.length * 120 + 300);
 }

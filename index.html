@@ -184,37 +184,6 @@
     <div class="stars-container" id="stars-container"></div>
 
     <div class="cake-wrapper">
-      <!-- Candles on top of image -->
-      <div class="candles-row" id="candles-row">
-        <div class="candle">
-          <div class="flame" id="f0"></div>
-          <div class="wick"></div>
-          <div class="candle-body" style="background:#a8d8a8"></div>
-        </div>
-        <div class="candle">
-          <div class="flame" id="f1"></div>
-          <div class="wick"></div>
-          <div class="candle-body" style="background:#a8c8e8"></div>
-        </div>
-        <div class="candle">
-          <div class="flame" id="f2"></div>
-          <div class="wick"></div>
-          <div class="candle-body" style="background:#a8d8a8"></div>
-        </div>
-      </div>
-      <img src="./src/img/cake.png" alt="Birthday Cake" class="cake-img">
-    </div>
-
-    <button class="blow-btn" id="blow-btn" onclick="blowCandles()">💨 BLOW!</button>
-    <div class="wish-msg" id="wish-msg"></div>
-  </div>
-</div>
-<!-- SCREEN: Cake -->
-<div class="screen" id="screen-cake">
-  <div class="cake-content">
-    <div class="make-wish-text" id="make-wish-text">Make a wish ✨</div>
-    <div class="stars-container" id="stars-container"></div>
-    <div class="cake-wrapper">
       <div class="candles-row" id="candles-row">
         <div class="candle"><div class="flame" id="f0"></div><div class="wick"></div><div class="candle-body" style="background:#ff97b7"></div></div>
         <div class="candle"><div class="flame" id="f1"></div><div class="wick"></div><div class="candle-body" style="background:#5bb8f5"></div></div>
@@ -222,13 +191,14 @@
         <div class="candle"><div class="flame" id="f3"></div><div class="wick"></div><div class="candle-body" style="background:#ff97b7"></div></div>
         <div class="candle"><div class="flame" id="f4"></div><div class="wick"></div><div class="candle-body" style="background:#5bb8f5"></div></div>
       </div>
-      <div class="cake-emoji">🎂</div>
+      <img src="./src/img/cake.png" alt="Birthday Cake" class="cake-img">
     </div>
+
     <button class="blow-btn" id="blow-btn" onclick="blowCandles()">💨 BLOW!</button>
     <div class="wish-msg" id="wish-msg"></div>
-    <button class="btn-back" onclick="showScreen('screen-gifts')">Back</button>
+    <button class="btn-back hidden" id="btn-back-cake" onclick="goTo('screen-gifts')">Back</button>
   </div>
-  <div class="confetti-container" id="confetti-container"></div>
+  <div class="confetti-container" id="confetti-container"></div>    
 </div>
 <!-- Music button -->
 <button class="music-btn" id="music-btn" onclick="toggleMusic()" title="Toggle music">🎵</button>
