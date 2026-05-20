@@ -289,11 +289,6 @@ function launchConfetti() {
 
 // PHOTO GALLERY
 
-
-
-// PHOTO GALLERY
-// Replace your entire photo gallery section in app.js with this
-
 const galleryPhotos = [
   { src: './src/img/photo1.jpg', cap: 'bestie moments 💕' },
   { src: './src/img/photo2.jpg', cap: 'late night memories 🌙' },
