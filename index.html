@@ -176,100 +176,7 @@
 </div>
 
 
-<!-- SCREEN: Photo Gallery -->
-<div class="screen" id="screen-photo-gallery">
-  <div class="photo-gallery-content">
-    <h1 class="gallery-title">✨ Memory Collage ✨</h1>
 
-    <div class="gallery-collage">
-      <!-- TOP ROW (3 photos rotated 35 degrees) -->
-      <div class="collage-row top-row">
-        <div class="collage-frame frame-top-left" data-index="0">
-          <div class="frame-border">
-            <img src="./src/img/cutie-pie.jpg" alt="Memory 1" class="collage-photo">
-            <div class="tape tape-tl"></div>
-            <div class="tape tape-tr"></div>
-            <div class="tape tape-bl"></div>
-            <div class="tape tape-br"></div>
-          </div>
-          <p class="photo-label">bestie moments</p>
-        </div>
-
-        <div class="collage-frame frame-top-center" data-index="1">
-          <div class="frame-border">
-            <img src="./src/img/choice.gif" alt="Memory 2" class="collage-photo">
-            <div class="tape tape-tl"></div>
-            <div class="tape tape-tr"></div>
-            <div class="tape tape-bl"></div>
-            <div class="tape tape-br"></div>
-          </div>
-          <p class="photo-label">late night memories</p>
-        </div>
-
-        <div class="collage-frame frame-top-right" data-index="2">
-          <div class="frame-border">
-            <img src="./src/img/cutie-pie.jpg" alt="Memory 3" class="collage-photo">
-            <div class="tape tape-tl"></div>
-            <div class="tape tape-tr"></div>
-            <div class="tape tape-bl"></div>
-            <div class="tape tape-br"></div>
-          </div>
-          <p class="photo-label">film dump</p>
-        </div>
-      </div>
-
-      <!-- BOTTOM ROW (3 photos with carousel) -->
-      <div class="collage-row bottom-row">
-        <div class="collage-frame frame-bottom-left carousel-item" data-index="3">
-          <div class="frame-border">
-            <img src="./src/img/choice.gif" alt="Memory 4" class="collage-photo">
-            <div class="tape tape-tl"></div>
-            <div class="tape tape-tr"></div>
-            <div class="tape tape-bl"></div>
-            <div class="tape tape-br"></div>
-          </div>
-          <p class="photo-label">girls day</p>
-        </div>
-
-        <div class="collage-frame frame-bottom-center carousel-item" data-index="4">
-          <div class="frame-border">
-            <img src="./src/img/cutie-pie.jpg" alt="Memory 5" class="collage-photo">
-            <div class="tape tape-tl"></div>
-            <div class="tape tape-tr"></div>
-            <div class="tape tape-bl"></div>
-            <div class="tape tape-br"></div>
-          </div>
-          <p class="photo-label">summer vibes</p>
-        </div>
-
-        <div class="collage-frame frame-bottom-right carousel-item" data-index="5">
-          <div class="frame-border">
-            <img src="./src/img/choice.gif" alt="Memory 6" class="collage-photo">
-            <div class="tape tape-tl"></div>
-            <div class="tape tape-tr"></div>
-            <div class="tape tape-bl"></div>
-            <div class="tape tape-br"></div>
-          </div>
-          <p class="photo-label">precious times</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="gallery-footer">
-      <p class="gallery-subtitle">Click any photo to see more 📸</p>
-      <button class="btn-back" id="btn-back-gallery" onclick="goTo('screen-gifts')">← Back</button>
-    </div>
-  </div>
-
-  <!-- Photo Modal -->
-  <div class="photo-modal" id="photo-modal">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closePhotoModal()">✕</button>
-      <img id="modal-photo" src="" alt="Full photo" class="modal-photo">
-      <p id="modal-caption" class="modal-caption"></p>
-    </div>
-  </div>
-</div>
 
 <!-- Screen : Cake -->
 <div class="screen" id="screen-cake">
@@ -295,6 +202,99 @@
   </div>
   <div class="confetti-container" id="confetti-container"></div>    
 </div>
+<!-- SCREEN: Photo Gallery -->
+<!-- REPLACE your entire <div class="screen" id="screen-photo-gallery"> block with this -->
+
+<div class="screen" id="screen-photo-gallery">
+
+  <div class="grain-overlay"></div>
+  <div class="sparkle-layer" id="sparkle-layer"></div>
+
+  <div class="gallery-scroll-wrap">
+    <div class="gallery-inner">
+
+      <div class="gallery-top-title">✨ our memories ✨</div>
+
+      <!-- FILM STRIP 1 -->
+      <div class="film-strip strip-1">
+        <div class="sprockets left">
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+        </div>
+        <div class="strip-photos">
+          <div class="strip-photo" onclick="openModal(0)">
+            <img src="./src/img/photo1.jpg" alt="memory 1">
+            <div class="tape tape-a"></div>
+          </div>
+          <div class="strip-photo" onclick="openModal(1)">
+            <img src="./src/img/photo2.jpg" alt="memory 2">
+          </div>
+          <div class="strip-photo" onclick="openModal(2)">
+            <img src="./src/img/photo3.jpg" alt="memory 3">
+            <div class="tape tape-b"></div>
+          </div>
+        </div>
+        <div class="sprockets right">
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+        </div>
+      </div>
+
+      <div class="between-tape tape-between-1"></div>
+      <div class="between-tape tape-between-2"></div>
+
+      <!-- FILM STRIP 2 -->
+      <div class="film-strip strip-2">
+        <div class="sprockets left">
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+        </div>
+        <div class="strip-photos">
+          <div class="strip-photo" onclick="openModal(3)">
+            <img src="./src/img/photo4.jpg" alt="memory 4">
+          </div>
+          <div class="strip-photo" onclick="openModal(4)">
+            <img src="./src/img/photo5.jpg" alt="memory 5">
+          </div>
+          <div class="strip-photo" onclick="openModal(5)">
+            <img src="./src/img/photo6.jpg" alt="memory 6">
+            <div class="tape tape-c"></div>
+          </div>
+        </div>
+        <div class="overlap-photo" onclick="openModal(4)">
+          <img src="./src/img/photo5.jpg" alt="memory 5">
+          <div class="tape tape-overlap-top"></div>
+          <div class="tape tape-overlap-bot"></div>
+        </div>
+        <div class="sprockets right">
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+        </div>
+      </div>
+
+      <div class="between-tape tape-between-3"></div>
+
+      <div class="gallery-footer-row">
+        <p class="gallery-hint">tap any photo to open 📸</p>
+        <button class="btn-back" onclick="goTo('screen-gifts')">← Back</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="gallery-modal" id="gallery-modal" onclick="closeModal()">
+    <div class="modal-inner" onclick="event.stopPropagation()">
+      <button class="modal-x" onclick="closeModal()">✕</button>
+      <img id="modal-img" src="" alt="">
+      <p id="modal-cap" class="modal-cap"></p>
+    </div>
+  </div>
+
+</div>
+
+
+
 <!-- Music button -->
 <button class="music-btn" id="music-btn" onclick="toggleMusic()" title="Toggle music">🎵</button>
 <div class="toast" id="toast"></div>

@@ -288,49 +288,48 @@ function launchConfetti() {
 }
 
 // PHOTO GALLERY
-const photoData = [
-  { label: 'bestie moments', src: './src/img/cutie-pie.jpg' },
-  { label: 'late night memories', src: './src/img/choice.gif' },
-  { label: 'film dump', src: './src/img/cutie-pie.jpg' },
-  { label: 'girls day', src: './src/img/choice.gif' },
-  { label: 'summer vibes', src: './src/img/cutie-pie.jpg' },
-  { label: 'precious times', src: './src/img/choice.gif' }
+
+
+
+// PHOTO GALLERY
+// Replace your entire photo gallery section in app.js with this
+
+const galleryPhotos = [
+  { src: './src/img/photo1.jpg', cap: 'bestie moments 💕' },
+  { src: './src/img/photo2.jpg', cap: 'late night memories 🌙' },
+  { src: './src/img/photo3.jpg', cap: 'film dump 📸' },
+  { src: './src/img/photo4.jpg', cap: 'girls day ☀️' },
+  { src: './src/img/photo5.jpg', cap: 'summer vibes 🌸' },
+  { src: './src/img/photo6.jpg', cap: 'precious times 💙' }
 ];
 
-function openPhotoModal(index) {
-  const modal = document.getElementById('photo-modal');
-  const photo = document.getElementById('modal-photo');
-  const caption = document.getElementById('modal-caption');
-
-  if (photoData[index]) {
-    photo.src = photoData[index].src;
-    caption.textContent = photoData[index].label;
-    modal.classList.add('visible');
-  }
+function openModal(idx) {
+  const modal = document.getElementById('gallery-modal');
+  document.getElementById('modal-img').src = galleryPhotos[idx].src;
+  document.getElementById('modal-cap').textContent = galleryPhotos[idx].cap;
+  modal.classList.add('open');
 }
 
-function closePhotoModal() {
-  const modal = document.getElementById('photo-modal');
-  modal.classList.remove('visible');
+function closeModal() {
+  document.getElementById('gallery-modal').classList.remove('open');
 }
 
-// Close modal on outside click
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('photo-modal');
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closePhotoModal();
-    });
+function initPhotoGallery() {
+  const layer = document.getElementById('sparkle-layer');
+  if (!layer || layer.children.length > 0) return;
+  const chars = ['✨','💕','🌸','⭐','💫'];
+  for (let i = 0; i < 12; i++) {
+    const s = document.createElement('div');
+    s.textContent = chars[Math.floor(Math.random()*chars.length)];
+    s.style.cssText = `
+      position:absolute;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      font-size:${12+Math.random()*14}px;
+      opacity:${0.15+Math.random()*0.25};
+      animation: starTwinkle ${2+Math.random()*3}s ease-in-out infinite ${Math.random()*3}s;
+      pointer-events:none;
+    `;
+    layer.appendChild(s);
   }
-
-  // Add click handlers to gallery frames
-  document.querySelectorAll('.collage-frame').forEach((frame, i) => {
-    frame.addEventListener('click', () => openPhotoModal(i));
-  });
-
-  // Esc key to close modal
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closePhotoModal();
-  });
-});
-
+}
