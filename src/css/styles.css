@@ -1312,3 +1312,53 @@ body {
 .letter-back-btn {
   margin-top: 10px;
 }
+
+/* Letter hint section */
+.letter-hint-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 20px;
+  background: rgba(255,179,198,0.2);
+  border-radius: 20px;
+  border: 2px dashed #ffb3c6;
+  width: 100%;
+  text-align: center;
+}
+
+.letter-hint-text {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(18px, 3.5vw, 22px);
+  color: #d45f8a;
+  font-weight: 600;
+}
+
+.letter-hint-text2 {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(16px, 3vw, 20px);
+  color: #b8759c;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.btn-hint-next {
+  padding: 14px 36px;
+  border-radius: 50px;
+  border: none;
+  background: linear-gradient(135deg, #ff8fab, #ffb3c6);
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(212,95,138,0.3);
+  transition: all 0.3s;
+  letter-spacing: 1px;
+  animation: btnPulse 1.8s ease-in-out infinite;
+}
+
+.btn-hint-next:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 28px rgba(212,95,138,0.45);
+}

@@ -341,7 +341,7 @@ function initLetterHearts() {
   for (let i = 0; i < 20; i++) {
     const h = document.createElement('div');
     h.className = 'letter-heart-float';
-    h.textContent = '♡';
+    h.textContent = '₊˚⊹♡🎂';
     h.style.cssText = `
       left:${Math.random()*100}%;
       top:${Math.random()*100}%;
