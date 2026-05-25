@@ -76,6 +76,7 @@ function goTo(id) {
     if (id === 'screen-miss') setupKissBackground();
     if (id === 'screen-gifts') startGiftsScreen();
     if (id === 'screen-photo-gallery') initPhotoGallery();
+    if (id === 'screen-letter') initLetterHearts();
     // Reset passcode state when going back to start
     if (id === 'screen-passcode') {
       entered = '';
@@ -161,9 +162,13 @@ function openGift(idx) {
     setTimeout(() => goTo('screen-photo-gallery'), 600);
     return;
   }
-  const reveal = document.getElementById('gift-reveal');
-  reveal.textContent = giftMessages[idx];
-  reveal.classList.add('visible');
+  if (idx === 2) {
+  setTimeout(() => goTo('screen-letter'), 400);
+  return;
+}
+const reveal = document.getElementById('gift-reveal');
+reveal.textContent = giftMessages[idx];
+reveal.classList.add('visible');
 }
 
 function startGiftsScreen() {
@@ -326,5 +331,25 @@ function initPhotoGallery() {
       pointer-events:none;
     `;
     layer.appendChild(s);
+  }
+}
+
+// LETTER
+function initLetterHearts() {
+  const bg = document.getElementById('letter-hearts');
+  if (!bg || bg.children.length > 0) return;
+  for (let i = 0; i < 20; i++) {
+    const h = document.createElement('div');
+    h.className = 'letter-heart-float';
+    h.textContent = '♡';
+    h.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      font-size:${14+Math.random()*22}px;
+      animation-duration:${3+Math.random()*4}s;
+      animation-delay:${Math.random()*4}s;
+      opacity:${0.2+Math.random()*0.35};
+    `;
+    bg.appendChild(h);
   }
 }

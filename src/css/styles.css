@@ -1180,3 +1180,135 @@ body {
 }
 
 .modal-x:hover { transform: scale(1.15); background: #b8759c; }
+
+/* ===== LOVE LETTER ===== */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+#screen-letter {
+  background: #fff5f0;
+  overflow: hidden;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.letter-bg-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.letter-heart-float {
+  position: absolute;
+  color: #ffb3c6;
+  animation: letterHeartFloat var(--dur, 4s) ease-in-out infinite var(--delay, 0s);
+  pointer-events: none;
+}
+
+@keyframes letterHeartFloat {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-18px) rotate(5deg); }
+}
+
+.letter-scroll-wrap {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.letter-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 70px;
+  max-width: 560px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+/* Title block */
+.letter-title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  position: relative;
+}
+
+.letter-heart-icon {
+  font-size: 32px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.letter-title-top {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(28px, 6vw, 46px);
+  font-weight: 600;
+  color: #e8334a;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.letter-title-main {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(48px, 11vw, 82px);
+  font-weight: 700;
+  color: #e8334a;
+  letter-spacing: 3px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Letter body */
+.letter-body {
+  background: rgba(255,255,255,0.6);
+  border-radius: 16px;
+  padding: 30px 28px;
+  box-shadow: 0 4px 20px rgba(232,51,74,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+  backdrop-filter: blur(4px);
+}
+
+.letter-body p {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(18px, 3.5vw, 24px);
+  font-weight: 600;
+  color: #c0392b;
+  line-height: 1.75;
+  text-align: center;
+}
+
+/* Closing */
+.letter-closing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.letter-closing p {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(18px, 3.5vw, 24px);
+  font-weight: 700;
+  color: #c0392b;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.letter-xxx {
+  font-size: clamp(22px, 4vw, 30px) !important;
+  margin-top: 10px;
+  letter-spacing: 8px !important;
+}
+
+.letter-back-btn {
+  margin-top: 10px;
+}
