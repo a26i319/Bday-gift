@@ -77,6 +77,7 @@ function goTo(id) {
     if (id === 'screen-gifts') startGiftsScreen();
     if (id === 'screen-photo-gallery') initPhotoGallery();
     if (id === 'screen-letter') initLetterHearts();
+    if (id === 'screen-disclaimer') initDisclaimerScreen();
     // Reset passcode state when going back to start
     if (id === 'screen-passcode') {
       entered = '';
@@ -143,17 +144,19 @@ function clickNo(){
 }
 
 // GIFTS
-// GIFTS
 const giftMessages = [
   '🎂 Opening the cake room... make a wish!!',
   '📸 Gift 2: Opening our memory collage...',
   '🌟 Gift 3: A promise to always make you smile, no matter what 🌟'
 ];
 
+let visitedGifts = new Set();
+
 function openGift(idx) {
   const box = document.getElementById('box-' + idx);
   if (box.classList.contains('opened')) return;
   box.classList.add('opened');
+  visitedGifts.add(idx);
   if (idx === 0) {
     setTimeout(() => goTo('screen-cake'), 400);
     return;
@@ -179,7 +182,21 @@ function startGiftsScreen() {
   boxes.classList.remove('slide-up');
   const reveal = document.getElementById('gift-reveal');
   reveal.classList.remove('visible');
-  document.querySelectorAll('.gift-box').forEach(b => b.classList.remove('opened'));
+  document.querySelectorAll('.gift-box').forEach((b, idx) => {
+    if (visitedGifts.has(idx)) {
+      b.classList.add('opened');
+    } else {
+      b.classList.remove('opened');
+    }
+  });
+
+  if (visitedGifts.size === 3) {
+    setTimeout(() => {
+      document.getElementById('gifts-next-btn').classList.add('visible');
+    }, 300);
+  } else {
+    document.getElementById('gifts-next-btn').classList.remove('visible');
+  }
 
   const title = '🎁 Gift for you';
   let i = 0;
@@ -351,5 +368,24 @@ function initLetterHearts() {
       opacity:${0.2+Math.random()*0.35};
     `;
     bg.appendChild(h);
+  }
+}
+
+// DISCLAIMER
+function initDisclaimerScreen() {
+  const container = document.getElementById('disclaimer-hearts');
+  if (!container || container.children.length > 0) return;
+
+  for (let i = 0; i < 8; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.textContent = '❤️';
+    heart.style.cssText = `
+      left: ${Math.random() * 100}%;
+      bottom: -50px;
+      animation-duration: ${3 + Math.random() * 2}s;
+      animation-delay: ${Math.random() * 3}s;
+    `;
+    container.appendChild(heart);
   }
 }
