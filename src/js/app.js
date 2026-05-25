@@ -290,7 +290,7 @@ function launchConfetti() {
 // PHOTO GALLERY
 
 const galleryPhotos = [
-  { src: './src/img/photosession/gorgerous.jpg', cap: 'Gourgerousaurus' },
+  { src: './src/img/photosession/gorgerous.jpg', cap: ' Gorgeousaurus' },
   { src: './src/img/photosession/honeypie.jpg', cap: 'Prettiest Innocent Girl' },
   { src: './src/img/photosession/smile.jpg', cap: 'Prettiest Smile That Ive Ever Seen' },
   { src: './src/img/photosession/cutie.jpg', cap: 'Cutiepie' },
