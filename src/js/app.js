@@ -290,12 +290,12 @@ function launchConfetti() {
 // PHOTO GALLERY
 
 const galleryPhotos = [
-  { src: './src/img/photo1.jpg', cap: 'bestie moments 💕' },
-  { src: './src/img/photo2.jpg', cap: 'late night memories 🌙' },
-  { src: './src/img/photo3.jpg', cap: 'film dump 📸' },
-  { src: './src/img/photo4.jpg', cap: 'girls day ☀️' },
-  { src: './src/img/photo5.jpg', cap: 'summer vibes 🌸' },
-  { src: './src/img/photo6.jpg', cap: 'precious times 💙' }
+  { src: './src/img/photosession/gorgerous.jpg', cap: 'Gourgerousaurus' },
+  { src: './src/img/photosession/honeypie.jpg', cap: 'Prettiest Innocent Girl' },
+  { src: './src/img/photosession/smile.jpg', cap: 'Prettiest Smile That Ive Ever Seen' },
+  { src: './src/img/photosession/cutie.jpg', cap: 'Cutiepie' },
+  { src: './src/img/photosession/pretty-girl.jpg', cap: 'Beautiful Girl Of ALL times' },
+  { src: './src/img/photosession/airport.jpg', cap: 'AIRPORT!!!!!' }
 ];
 
 function openModal(idx) {
