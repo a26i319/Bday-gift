@@ -299,7 +299,7 @@
 
   <div class="disclaimer-content">
     <div class="disclaimer-card">
-      <div class="disclaimer-title">💌 Tiny Disclaimer</div>
+      <div class="disclaimer-title">Tiny Disclaimer</div>
 
       <div class="disclaimer-message" id="disclaimer-text">
         <p>You can stop here if you'd like.</p>
@@ -307,9 +307,18 @@
         <p>and maybe you'll get to know me too. </p>
       </div>
 
-      <button class="disclaimer-btn" onclick="goTo('screen-letter')">Continue <span class="arrow">→</span></button>
+      <button class="disclaimer-btn" onclick="goTo('screen-video')">Continue <span class="arrow">→</span></button>
+      <p class="disclaimer-hint">🎧 use your headphone or earphone to enjoy music</p>
     </div>
   </div>
+</div>
+
+<!-- SCREEN: VIDEO -->
+<div class="screen" id="screen-video">
+  <video id="video-player" class="video-player" controls autoplay>
+    <source src="./src/video/Her-jvke.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 </div>
 
 <!-- SCREEN: LETTER  -->
@@ -348,9 +357,6 @@
 <!-- Music button -->
 <button class="music-btn" id="music-btn" onclick="toggleMusic()" title="Toggle music">🎵</button>
 <div class="toast" id="toast"></div>
-<!-- SCREEN: GIFTS -->
-
-
 
 <!-- Background music -->
 <audio id="bg-music" loop>

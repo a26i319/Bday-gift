@@ -78,6 +78,7 @@ function goTo(id) {
     if (id === 'screen-photo-gallery') initPhotoGallery();
     if (id === 'screen-letter') initLetterHearts();
     if (id === 'screen-disclaimer') initDisclaimerScreen();
+    if (id === 'screen-video') setupVideoScreen();
     // Reset passcode state when going back to start
     if (id === 'screen-passcode') {
       entered = '';
@@ -387,5 +388,27 @@ function initDisclaimerScreen() {
       animation-delay: ${Math.random() * 3}s;
     `;
     container.appendChild(heart);
+  }
+}
+
+// VIDEO SCREEN
+function setupVideoScreen() {
+  const bgMusic = document.getElementById('bg-music');
+  const musicBtn = document.getElementById('music-btn');
+  const videoPlayer = document.getElementById('video-player');
+
+  if (bgMusic) {
+    bgMusic.pause();
+    musicPlaying = false;
+  }
+
+  if (musicBtn) {
+    musicBtn.style.display = 'none';
+  }
+
+  if (videoPlayer) {
+    videoPlayer.onended = function() {
+      goTo('screen-letter');
+    };
   }
 }

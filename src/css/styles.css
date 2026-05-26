@@ -1211,6 +1211,7 @@ body {
 /* ===== DISCLAIMER ===== */
 
 #screen-disclaimer {
+  background:var(--pink);
   justify-content: center;
   align-items: center;
   position: relative;
@@ -1335,6 +1336,17 @@ body {
 
 .disclaimer-btn:hover .arrow {
   transform: translateX(6px);
+}
+
+.disclaimer-hint {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: #b8759c;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-top: 16px;
+  animation: fadeInUp 0.8s ease-out 1.4s forwards;
+  opacity: 0;
 }
 
 .floating-heart {
@@ -1542,4 +1554,27 @@ body {
 .btn-hint-next:hover {
   transform: translateY(-3px) scale(1.04);
   box-shadow: 0 10px 28px rgba(212,95,138,0.45);
+}
+
+/* ===== VIDEO SCREEN ===== */
+
+#screen-video {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain;
+  display: block;
+}
+
+.video-player::-webkit-media-controls {
+  display: none;
 }
