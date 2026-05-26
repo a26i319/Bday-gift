@@ -410,5 +410,6 @@ function setupVideoScreen() {
     videoPlayer.onended = function() {
       goTo('screen-letter');
     };
+    videoPlayer.play();
   }
 }
