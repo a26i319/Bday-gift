@@ -10,7 +10,7 @@ const questions = [
     emoji: '🎨',
     question: "What's your favorite color?",
     choices: ['Pink 💗', 'Blue 💙', 'Purple 💜', 'Yellow 💛'],
-    funFact: "Mine is blue 💙 — maybe that's why I like you so much lol"
+    funFact: "Mine is blue  — maybe that's why I am so calm and cool 😎💙"
   },
   {
     id: 1,
@@ -26,7 +26,7 @@ const questions = [
     emoji: '🍜',
     question: "What's your go-to comfort food when you're having a bad day?",
     placeholder: 'Type your answer here...',
-    funFact: "Mine is ramen 🍜 — simple, warm, never disappoints. kinda like a good person 👀"
+    funFact: "Mine is Pizza 🍕 — it's like a warm hug in food form. We should get some together sometime! 😄"
   },
   {
     id: 3,
@@ -90,7 +90,7 @@ let answers = [];
 
 // ===== EMAILJS CONFIG =====
 // Replace these with your actual EmailJS credentials
-const EMAILJS_SERVICE_ID  = 'service_xn4h2u6';   
+const EMAILJS_SERVICE_ID  = 'service_nitcegq';   
 const EMAILJS_TEMPLATE_ID = 'template_vcinr81';  
 const EMAILJS_PUBLIC_KEY  = 'hG_lWUA-yK6k4xnhf';   
 const MY_EMAIL            = 'thureinminhtun347@gmail.com'; 
@@ -218,7 +218,7 @@ function showFunFact(idx) {
   if (!q.funFact) return;
   const bubble = document.getElementById('qa-funfact');
   if (!bubble) return;
-  bubble.textContent = 'ʚ♡ɞ' + q.funFact;
+  bubble.textContent = '💙' + q.funFact;
   bubble.style.display = 'block';
   requestAnimationFrame(() => bubble.classList.add('qa-funfact-show'));
 }
