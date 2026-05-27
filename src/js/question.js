@@ -91,8 +91,8 @@ let answers = [];
 // ===== EMAILJS CONFIG =====
 // Replace these with your actual EmailJS credentials
 const EMAILJS_SERVICE_ID  = 'service_nitcegq';   
-const EMAILJS_TEMPLATE_ID = 'template_vcinr81';  
-const EMAILJS_PUBLIC_KEY  = 'hG_lWUA-yK6k4xnhf';   
+const EMAILJS_TEMPLATE_ID = 'template_7v11hhb';  
+const EMAILJS_PUBLIC_KEY  = 'ZxdBy48kNc6x9aS70';   
 const MY_EMAIL            = 'thureinminhtun347@gmail.com'; 
 
 // ===== INIT =====
@@ -258,6 +258,7 @@ function startAskOut() {
   const wrap = document.getElementById('askout-wrap');
   const reveal = document.getElementById('askout-reveal');
   if (!wrap || !reveal) return;
+  noEscapeCount = 0; // ✅ Bug 3 fix: reset on each entry
 
   const lines = [
     { delay: 0,    text: "Okay so... I've been building up to this 😅", cls: 'askout-line' },
@@ -466,7 +467,6 @@ async function sendDateEmail() {
   btn.disabled = true;
   btn.textContent = '💌 Sending...';
 
-  // Build answers summary
   const stored = JSON.parse(localStorage.getItem('shoon_answers') || '{}');
   const answersText = (stored.answers || [])
     .filter(a => a.answer !== '—')
@@ -483,18 +483,13 @@ async function sendDateEmail() {
   };
 
   try {
-    // Initialize EmailJS if not already done
-    if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
-      emailjs.init(EMAILJS_PUBLIC_KEY);
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-      showDateSuccess(true);
-    } else {
-      // Dev mode: just show success UI (no real email)
-      console.log('📧 Would send email with:', templateParams);
-      showDateSuccess(false);
-    }
+    // ✅ EmailJS v4 correct usage: init with object, then send with 3 args
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+    showDateSuccess(true);
   } catch (err) {
     console.error('Email error:', err);
+    console.error('Error details:', JSON.stringify(err));
     btn.disabled = false;
     btn.textContent = '❌ Failed — try again';
     setTimeout(() => { btn.textContent = '💌 Send to Him'; btn.disabled = false; }, 2000);
