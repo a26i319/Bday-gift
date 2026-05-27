@@ -90,7 +90,7 @@ let answers = [];
 
 // ===== EMAILJS CONFIG =====
 // Replace these with your actual EmailJS credentials
-const EMAILJS_SERVICE_ID  = 'service_tesrfdd';   
+const EMAILJS_SERVICE_ID  = 'service_xn4h2u6';   
 const EMAILJS_TEMPLATE_ID = 'template_vcinr81';  
 const EMAILJS_PUBLIC_KEY  = 'hG_lWUA-yK6k4xnhf';   
 const MY_EMAIL            = 'thureinminhtun347@gmail.com'; 
@@ -218,7 +218,7 @@ function showFunFact(idx) {
   if (!q.funFact) return;
   const bubble = document.getElementById('qa-funfact');
   if (!bubble) return;
-  bubble.textContent = '💙 ' + q.funFact;
+  bubble.textContent = 'ʚ♡ɞ' + q.funFact;
   bubble.style.display = 'block';
   requestAnimationFrame(() => bubble.classList.add('qa-funfact-show'));
 }
@@ -344,7 +344,7 @@ function answerAskOut(yes) {
 
 // ===== HEARTS BURST =====
 function launchHearts() {
-  const emojis = ['💙','💕','✨','💗','🎉','💫','🌸'];
+  const emojis = ['ʚ♡ɞ','💕','✨','💗','⋆｡˚ ⊹ ࣪ ˖ ᥫ᭡','(つ≧▽≦)つ','🌸'];
   for (let i = 0; i < 25; i++) {
     setTimeout(() => {
       const h = document.createElement('div');
