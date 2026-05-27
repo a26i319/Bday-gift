@@ -388,6 +388,66 @@
   </div>
 </div>
 
+<!-- SCREEN: DATE PICKER -->
+<div class="screen" id="screen-date-picker">
+
+  <!-- Ambient bokeh hearts -->
+  <div class="dp-bg-hearts" id="dp-bg-hearts"></div>
+
+  <div class="dp-scroll-wrap">
+    <div class="dp-inner" id="dp-picker-wrap">
+
+      <!-- Header -->
+      <div class="dp-header">
+        <div class="dp-header-emoji">🗓️</div>
+        <div class="dp-header-title">Pick Our Date</div>
+        <div class="dp-header-sub">When should we go? 💕</div>
+      </div>
+
+      <!-- Calendar -->
+      <div class="dp-card dp-calendar-card">
+        <div class="cal-nav">
+          <button class="cal-nav-btn" onclick="calPrevMonth()">‹</button>
+          <div class="cal-month-label" id="cal-month-label">June 2025</div>
+          <button class="cal-nav-btn" onclick="calNextMonth()">›</button>
+        </div>
+        <div id="cal-grid"></div>
+      </div>
+
+      <!-- Selected date label -->
+      <div class="dp-selected-label" id="dp-selected-label">Tap a date above 💗</div>
+
+      <!-- Answers recap (collapsible) -->
+      <div class="dp-card dp-answers-card">
+        <div class="dp-answers-title" onclick="toggleAnswersSummary()">
+          📋 Your Q&amp;A Answers <span class="dp-toggle-icon" id="dp-toggle-icon">▾</span>
+        </div>
+        <div class="dp-answers-body" id="dp-answers-body" style="display:none">
+          <div id="dp-answers-summary"></div>
+        </div>
+      </div>
+
+      <!-- Send button -->
+      <button class="dp-send-btn" id="dp-send-btn" onclick="sendDateEmail()" disabled>
+        💌 Send to Him
+      </button>
+
+      <p class="dp-send-hint">This will notify him of the date you picked 🎀</p>
+
+    </div>
+
+    <!-- Success state (hidden until sent) -->
+    <div class="dp-success" id="dp-success" style="display:none">
+      <div class="dp-success-emoji">🎉</div>
+      <div class="dp-success-title">He's been notified!</div>
+      <div class="dp-success-date"></div>
+      <div class="dp-success-note">Your date is confirmed 💕</div>
+      <div class="dp-success-sub">Can't wait to see you 🥰</div>
+    </div>
+
+  </div>
+</div>
+
 <!-- Music button -->
 <button class="music-btn" id="music-btn" onclick="toggleMusic()" title="Toggle music">🎵</button>
 <div class="toast" id="toast"></div>
@@ -399,6 +459,7 @@
 
 <script src="./src/js/app.js"></script> 
 <script src="./src/js/question.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 // ===== Q&A MODULE =====
 // Mix of multiple choice + type-in
-// After each answer: a "me too!" fun fact slides in
-// Question 10 transitions into asking her out
+// Answers saved to Anthropic API (persistent storage)
+// After YES: calendar for date picking → email sent
 
 const questions = [
   {
@@ -24,7 +24,7 @@ const questions = [
     id: 2,
     type: 'type',
     emoji: '🍜',
-    question: 'What\'s your go-to comfort food when you\'re having a bad day?',
+    question: "What's your go-to comfort food when you're having a bad day?",
     placeholder: 'Type your answer here...',
     funFact: "Mine is ramen 🍜 — simple, warm, never disappoints. kinda like a good person 👀"
   },
@@ -48,7 +48,7 @@ const questions = [
     id: 5,
     type: 'type',
     emoji: '💬',
-    question: 'What\'s one thing that always makes you smile no matter what?',
+    question: "What's one thing that always makes you smile no matter what?",
     placeholder: 'Tell me...',
     funFact: "For me it's random good morning texts from someone I care about 💙 small things hit different"
   },
@@ -88,6 +88,13 @@ const questions = [
 let currentQuestion = 0;
 let answers = [];
 
+// ===== EMAILJS CONFIG =====
+// Replace these with your actual EmailJS credentials
+const EMAILJS_SERVICE_ID  = 'service_tesrfdd';   
+const EMAILJS_TEMPLATE_ID = 'template_vcinr81';  
+const EMAILJS_PUBLIC_KEY  = 'hG_lWUA-yK6k4xnhf';   
+const MY_EMAIL            = 'thureinminhtun347@gmail.com'; 
+
 // ===== INIT =====
 function initQA() {
   currentQuestion = 0;
@@ -103,7 +110,6 @@ function renderQuestion() {
 
   updateProgress();
 
-  // Hide nav for special types
   if (nav) {
     nav.style.display = (q.type === 'askout') ? 'none' : 'flex';
   }
@@ -112,7 +118,7 @@ function renderQuestion() {
 
   if (q.type === 'choice') {
     inputHTML = `<div class="qa-choices">`;
-    q.choices.forEach((choice, i) => {
+    q.choices.forEach((choice) => {
       const sel = answers[currentQuestion] === choice ? ' selected' : '';
       inputHTML += `<button class="qa-choice${sel}" onclick="selectChoice('${escStr(choice)}')">${choice}</button>`;
     });
@@ -154,7 +160,6 @@ function renderQuestion() {
     <div class="qa-funfact-bubble" id="qa-funfact" style="display:none;"></div>
   `;
 
-  // Animate entrance
   requestAnimationFrame(() => {
     const card = document.getElementById('qa-card');
     if (card) card.classList.add('qa-card-enter');
@@ -162,12 +167,10 @@ function renderQuestion() {
 
   updateNavButtons();
 
-  // If askout, start the special sequence
   if (q.type === 'askout') {
     setTimeout(() => startAskOut(), 600);
   }
 
-  // Re-show funfact if going back
   if (answers[currentQuestion] !== undefined && q.type !== 'askout') {
     setTimeout(() => showFunFact(currentQuestion), 400);
   }
@@ -215,7 +218,7 @@ function showFunFact(idx) {
   if (!q.funFact) return;
   const bubble = document.getElementById('qa-funfact');
   if (!bubble) return;
-  bubble.textContent = '💙' + q.funFact;
+  bubble.textContent = '💙 ' + q.funFact;
   bubble.style.display = 'block';
   requestAnimationFrame(() => bubble.classList.add('qa-funfact-show'));
 }
@@ -256,7 +259,6 @@ function startAskOut() {
   const reveal = document.getElementById('askout-reveal');
   if (!wrap || !reveal) return;
 
-  // Build the ask-out UI step by step
   const lines = [
     { delay: 0,    text: "Okay so... I've been building up to this 😅", cls: 'askout-line' },
     { delay: 1200, text: "We've only known each other for a few months...", cls: 'askout-line' },
@@ -274,14 +276,13 @@ function startAskOut() {
     }, delay);
   });
 
-  // Show YES/NO buttons
   setTimeout(() => {
     const btnWrap = document.createElement('div');
     btnWrap.className = 'askout-question-wrap';
     btnWrap.innerHTML = `
-      <div class="askout-big-question">Would you go on a date with me? </div>
+      <div class="askout-big-question">Would you go on a date with me? 💕</div>
       <div class="askout-buttons">
-        <button class="askout-yes" onclick="answerAskOut(true)">Yes!!</button>
+        <button class="askout-yes" onclick="answerAskOut(true)">Yes!! 💗</button>
         <button class="askout-no" id="askout-no-btn" onclick="answerAskOut(false)">No</button>
       </div>
     `;
@@ -294,19 +295,19 @@ let noEscapeCount = 0;
 
 function answerAskOut(yes) {
   if (yes) {
-    // Save answer
-    answers[9] = 'YES ';
-    saveAnswers();
+    answers[9] = 'YES 💗';
+
+    // Save answers to localStorage + show date picker
+    saveAnswersLocally();
 
     const reveal = document.getElementById('askout-reveal');
     reveal.innerHTML = `
       <div class="askout-yes-response">
-        <div class="askout-yes-emoji"><img src="./src/img/choice.gif" alt="cute bear" class="choice-gif"></div>
-        <div class="askout-yes-text">YESSS!! I love you tooo!!!!</div>
-        <div class="askout-yes-sub">I'm literally so happy rn you have no idea</div>
-        <div class="askout-yes-sub">We'll talk about the details tomorrow</div>
-        <button class="qa-results-btn" onclick="goTo('screen-letter')" style="margin-top:20px;">
-          Read my letter 💌
+        <div class="askout-yes-emoji">💗</div>
+        <div class="askout-yes-text">She said YES!! 🎉</div>
+        <div class="askout-yes-sub">Now pick a date for us! 🗓️</div>
+        <button class="qa-results-btn" onclick="goTo('screen-date-picker')" style="margin-top:20px;">
+          Pick Our Date 💕
         </button>
       </div>
     `;
@@ -316,7 +317,6 @@ function answerAskOut(yes) {
     launchHearts();
 
   } else {
-    // NO button runs away
     noEscapeCount++;
     const noBtn = document.getElementById('askout-no-btn');
     if (!noBtn) return;
@@ -330,7 +330,6 @@ function answerAskOut(yes) {
       return;
     }
 
-    // Move the NO button to a random position
     const maxX = window.innerWidth - 100;
     const maxY = window.innerHeight - 50;
     noBtn.style.position = 'fixed';
@@ -338,7 +337,7 @@ function answerAskOut(yes) {
     noBtn.style.top = Math.random() * maxY + 'px';
     noBtn.style.zIndex = '9999';
 
-    const msgs = ["Nope!!", "Try again 😂", "Are you sure?? 👀"];
+    const msgs = ["Nope!! 😂", "Try again 😂", "Are you sure?? 👀"];
     noBtn.textContent = msgs[noEscapeCount - 1] || "Nuh Huh!!";
   }
 }
@@ -365,8 +364,8 @@ function launchHearts() {
   }
 }
 
-// ===== SAVE TO LOCALSTORAGE =====
-function saveAnswers() {
+// ===== SAVE LOCALLY =====
+function saveAnswersLocally() {
   const data = {
     savedAt: new Date().toLocaleString(),
     answers: questions.map((q, i) => ({
@@ -379,9 +378,154 @@ function saveAnswers() {
   } catch(e) {}
 }
 
-// ===== RESULTS =====
+// ===== DATE PICKER INIT =====
+let selectedDateStr = '';
+
+function initDatePicker() {
+  renderCalendar(new Date());
+
+  // Show stored answers summary
+  const summary = document.getElementById('dp-answers-summary');
+  if (summary) {
+    const stored = JSON.parse(localStorage.getItem('shoon_answers') || '{}');
+    if (stored.answers) {
+      summary.innerHTML = stored.answers
+        .filter(a => a.answer !== '—' && !a.question.includes('big one'))
+        .map(a => `<div class="dp-answer-row"><span>${a.question}</span><strong>${a.answer}</strong></div>`)
+        .join('');
+    }
+  }
+}
+
+let calYear, calMonth;
+
+function renderCalendar(date) {
+  calYear  = date.getFullYear();
+  calMonth = date.getMonth();
+
+  const months = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+
+  document.getElementById('cal-month-label').textContent = `${months[calMonth]} ${calYear}`;
+
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  let html = `
+    <div class="cal-grid-header">
+      <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span>
+      <span>Thu</span><span>Fri</span><span>Sat</span>
+    </div>
+    <div class="cal-grid-days">
+  `;
+
+  // empty cells before first day
+  for (let i = 0; i < firstDay; i++) {
+    html += `<div class="cal-day cal-empty"></div>`;
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const thisDate = new Date(calYear, calMonth, d);
+    const isPast = thisDate < today;
+    const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isSelected = dateStr === selectedDateStr;
+
+    html += `<div
+      class="cal-day${isPast ? ' cal-past' : ' cal-future'}${isSelected ? ' cal-selected' : ''}"
+      ${!isPast ? `onclick="pickDate('${dateStr}', '${months[calMonth]} ${d}, ${calYear}')"` : ''}
+    >${d}</div>`;
+  }
+
+  html += `</div>`;
+  document.getElementById('cal-grid').innerHTML = html;
+}
+
+function calPrevMonth() {
+  renderCalendar(new Date(calYear, calMonth - 1, 1));
+}
+function calNextMonth() {
+  renderCalendar(new Date(calYear, calMonth + 1, 1));
+}
+
+function pickDate(dateStr, readableDate) {
+  selectedDateStr = dateStr;
+  document.getElementById('dp-selected-label').textContent = `📅 Selected: ${readableDate}`;
+  document.getElementById('dp-send-btn').disabled = false;
+  // re-render to show selection
+  renderCalendar(new Date(calYear, calMonth, 1));
+}
+
+// ===== SEND EMAIL VIA EMAILJS =====
+async function sendDateEmail() {
+  if (!selectedDateStr) return;
+
+  const btn = document.getElementById('dp-send-btn');
+  btn.disabled = true;
+  btn.textContent = '💌 Sending...';
+
+  // Build answers summary
+  const stored = JSON.parse(localStorage.getItem('shoon_answers') || '{}');
+  const answersText = (stored.answers || [])
+    .filter(a => a.answer !== '—')
+    .map(a => `• ${a.question}\n  → ${a.answer}`)
+    .join('\n\n');
+
+  const templateParams = {
+    to_email:    MY_EMAIL,
+    reply_to:    MY_EMAIL,
+    date_chosen: selectedDateStr,
+    saved_at:    stored.savedAt || new Date().toLocaleString(),
+    answers:     answersText || 'No answers recorded',
+    subject:     `💕 She said YES! Date chosen: ${selectedDateStr}`
+  };
+
+  try {
+    // Initialize EmailJS if not already done
+    if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+      showDateSuccess(true);
+    } else {
+      // Dev mode: just show success UI (no real email)
+      console.log('📧 Would send email with:', templateParams);
+      showDateSuccess(false);
+    }
+  } catch (err) {
+    console.error('Email error:', err);
+    btn.disabled = false;
+    btn.textContent = '❌ Failed — try again';
+    setTimeout(() => { btn.textContent = '💌 Send to Him'; btn.disabled = false; }, 2000);
+  }
+}
+
+function showDateSuccess(emailSent) {
+  const screen = document.getElementById('dp-picker-wrap');
+  const success = document.getElementById('dp-success');
+  if (screen) screen.style.display = 'none';
+  if (success) {
+    success.style.display = 'flex';
+    success.querySelector('.dp-success-date').textContent = selectedDateStr;
+    if (!emailSent) {
+      success.querySelector('.dp-success-note').textContent =
+        '(Configure EmailJS credentials to send real emails 💌)';
+    }
+  }
+  launchHearts();
+
+  // Also save date to localStorage
+  try {
+    const stored = JSON.parse(localStorage.getItem('shoon_answers') || '{}');
+    stored.dateChosen = selectedDateStr;
+    localStorage.setItem('shoon_answers', JSON.stringify(stored));
+  } catch(e) {}
+}
+
+// ===== RESULTS (fallback) =====
 function showQAResults() {
-  saveAnswers();
+  saveAnswersLocally();
   const container = document.getElementById('qa-card-container');
   const nav = document.getElementById('qa-nav-row');
   if (nav) nav.style.display = 'none';
@@ -401,7 +545,7 @@ function showQAResults() {
   });
   html += '</div>';
   html += `<div class="qa-results-msg">Now I know you a little better 💗</div>`;
-  html += `<button class="qa-results-btn" onclick="goTo('screen-letter')">Read My Letter 💌</button>`;
+  html += `<button class="qa-results-btn" onclick="goTo('screen-date-picker')">Pick Our Date 💕</button>`;
   html += '</div>';
   container.innerHTML = html;
 

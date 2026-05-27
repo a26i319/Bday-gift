@@ -80,6 +80,7 @@ function goTo(id) {
     if (id === 'screen-disclaimer') initDisclaimerScreen();
     if (id === 'screen-video') setupVideoScreen();
     if (id === 'screen-qa') { initQA(); initQASparkles(); }
+    if (id === 'screen-date-picker') { initDatePicker(); initDPHearts(); }
     // Reset passcode state when going back to start
     if (id === 'screen-passcode') {
       entered = '';
@@ -412,5 +413,44 @@ function setupVideoScreen() {
       goTo('screen-qa-intro');
     };
     videoPlayer.play();
+  }
+}
+
+function toggleAnswersSummary() {
+  const body = document.getElementById('dp-answers-body');
+  const icon = document.getElementById('dp-toggle-icon');
+  if (!body) return;
+  const isOpen = body.style.display !== 'none';
+  body.style.display = isOpen ? 'none' : 'block';
+  if (icon) icon.classList.toggle('open', !isOpen);
+  // populate on first open
+  if (!isOpen) {
+    const stored = JSON.parse(localStorage.getItem('shoon_answers') || '{}');
+    const summary = document.getElementById('dp-answers-summary');
+    if (summary && stored.answers) {
+      summary.innerHTML = stored.answers
+        .filter(a => a.answer !== '—' && !a.question.includes('big one'))
+        .map(a => `<div class="dp-answer-row"><span>${a.question}</span><strong>${a.answer}</strong></div>`)
+        .join('');
+    }
+  }
+}
+
+function initDPHearts() {
+  const bg = document.getElementById('dp-bg-hearts');
+  if (!bg || bg.children.length > 0) return;
+  const emojis = ['💕','🌸','✨','💗','🎀'];
+  for (let i = 0; i < 14; i++) {
+    const h = document.createElement('div');
+    h.className = 'dp-floating-heart';
+    h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    h.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      font-size:${16+Math.random()*20}px;
+      --dur:${3+Math.random()*4}s;
+      --delay:${Math.random()*4}s;
+    `;
+    bg.appendChild(h);
   }
 }
