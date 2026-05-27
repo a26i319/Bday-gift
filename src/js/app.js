@@ -79,6 +79,7 @@ function goTo(id) {
     if (id === 'screen-letter') initLetterHearts();
     if (id === 'screen-disclaimer') initDisclaimerScreen();
     if (id === 'screen-video') setupVideoScreen();
+    if (id === 'screen-qa') { initQA(); initQASparkles(); }
     // Reset passcode state when going back to start
     if (id === 'screen-passcode') {
       entered = '';
