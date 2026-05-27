@@ -215,7 +215,7 @@ function showFunFact(idx) {
   if (!q.funFact) return;
   const bubble = document.getElementById('qa-funfact');
   if (!bubble) return;
-  bubble.textContent = '💙 ' + q.funFact;
+  bubble.textContent = '💙' + q.funFact;
   bubble.style.display = 'block';
   requestAnimationFrame(() => bubble.classList.add('qa-funfact-show'));
 }
@@ -259,8 +259,8 @@ function startAskOut() {
   // Build the ask-out UI step by step
   const lines = [
     { delay: 0,    text: "Okay so... I've been building up to this 😅", cls: 'askout-line' },
-    { delay: 1200, text: "We've only known each other 4 months...", cls: 'askout-line' },
-    { delay: 2600, text: "But honestly you've been on my mind a lot 💙", cls: 'askout-line' },
+    { delay: 1200, text: "We've only known each other for a few months...", cls: 'askout-line' },
+    { delay: 2600, text: "But honestly you've been on my mind a lot ", cls: 'askout-line' },
     { delay: 4000, text: "So I just wanted to ask you something...", cls: 'askout-line big' },
   ];
 
@@ -279,10 +279,10 @@ function startAskOut() {
     const btnWrap = document.createElement('div');
     btnWrap.className = 'askout-question-wrap';
     btnWrap.innerHTML = `
-      <div class="askout-big-question">Would you go on a date with me? 🥺💙</div>
+      <div class="askout-big-question">Would you go on a date with me? </div>
       <div class="askout-buttons">
-        <button class="askout-yes" onclick="answerAskOut(true)">Yes 💙</button>
-        <button class="askout-no" id="askout-no-btn" onclick="answerAskOut(false)">No 😅</button>
+        <button class="askout-yes" onclick="answerAskOut(true)">Yes!!</button>
+        <button class="askout-no" id="askout-no-btn" onclick="answerAskOut(false)">No</button>
       </div>
     `;
     reveal.appendChild(btnWrap);
@@ -295,16 +295,16 @@ let noEscapeCount = 0;
 function answerAskOut(yes) {
   if (yes) {
     // Save answer
-    answers[9] = 'YES 💙';
+    answers[9] = 'YES ';
     saveAnswers();
 
     const reveal = document.getElementById('askout-reveal');
     reveal.innerHTML = `
       <div class="askout-yes-response">
-        <div class="askout-yes-emoji">🎉💙🎉</div>
-        <div class="askout-yes-text">YESSS!! okay okay okay 😭💙</div>
+        <div class="askout-yes-emoji"><img src="./src/img/choice.gif" alt="cute bear" class="choice-gif"></div>
+        <div class="askout-yes-text">YESSS!! I love you tooo!!!!</div>
         <div class="askout-yes-sub">I'm literally so happy rn you have no idea</div>
-        <div class="askout-yes-sub">We'll talk about the details soon 🥺💙</div>
+        <div class="askout-yes-sub">We'll talk about the details tomorrow</div>
         <button class="qa-results-btn" onclick="goTo('screen-letter')" style="margin-top:20px;">
           Read my letter 💌
         </button>
@@ -331,15 +331,15 @@ function answerAskOut(yes) {
     }
 
     // Move the NO button to a random position
-    const maxX = window.innerWidth - 120;
-    const maxY = window.innerHeight - 60;
+    const maxX = window.innerWidth - 100;
+    const maxY = window.innerHeight - 50;
     noBtn.style.position = 'fixed';
     noBtn.style.left = Math.random() * maxX + 'px';
     noBtn.style.top = Math.random() * maxY + 'px';
     noBtn.style.zIndex = '9999';
 
-    const msgs = ["Nope 🏃", "Try again 😂", "Are you sure?? 👀"];
-    noBtn.textContent = msgs[noEscapeCount - 1] || "Run!! 🏃";
+    const msgs = ["Nope!!", "Try again 😂", "Are you sure?? 👀"];
+    noBtn.textContent = msgs[noEscapeCount - 1] || "Nuh Huh!!";
   }
 }
 
