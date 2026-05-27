@@ -315,10 +315,21 @@
 
 <!-- SCREEN: VIDEO -->
 <div class="screen" id="screen-video">
-  <video id="video-player" class="video-player" controls >
+  <video id="video-player" class="video-player" controls autoplay>
     <source src="./src/video/Her-jvke.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
+</div>
+
+<!-- SCREEN: Q&A INTRO -->
+<div class="screen" id="screen-qa-intro">
+  <div class="qa-intro-content">
+    <div class="qa-intro-text">
+      <p>So you are interested huh?</p>
+      <p>Then Let's start Q&A to get to know each other my girl!</p>
+    </div>
+    <button class="qa-start-btn" onclick="goTo('screen-letter')">Start</button>
+  </div>
 </div>
 
 <!-- SCREEN: LETTER  -->

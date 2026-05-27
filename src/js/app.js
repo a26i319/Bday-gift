@@ -408,7 +408,7 @@ function setupVideoScreen() {
 
   if (videoPlayer) {
     videoPlayer.onended = function() {
-      goTo('screen-letter');
+      goTo('screen-qa-intro');
     };
     videoPlayer.play();
   }
