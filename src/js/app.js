@@ -69,7 +69,17 @@ function checkPasscode() {
 }
 // NAVIGATION
 function goTo(id) {
+  if (id !== 'screen-video') {
+    const videoPlayer = document.getElementById('video-player');
+    if (videoPlayer) videoPlayer.pause();
+  }
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  if (id === 'screen-video') {
+    const target = document.getElementById(id);
+    if (target) target.classList.add('active');
+    setupVideoScreen();
+    return;
+  }
   setTimeout(() => {
     const target = document.getElementById(id);
     if (target) target.classList.add('active');
@@ -78,7 +88,6 @@ function goTo(id) {
     if (id === 'screen-photo-gallery') initPhotoGallery();
     if (id === 'screen-letter') initLetterHearts();
     if (id === 'screen-disclaimer') initDisclaimerScreen();
-    if (id === 'screen-video') setupVideoScreen();
     if (id === 'screen-qa') { initQA(); initQASparkles(); }
     if (id === 'screen-date-picker') { initDatePicker(); initDPHearts(); }
     // Reset passcode state when going back to start
@@ -412,7 +421,10 @@ function setupVideoScreen() {
     videoPlayer.onended = function() {
       goTo('screen-qa-intro');
     };
-    videoPlayer.play();
+    videoPlayer.play().catch(() => {
+      videoPlayer.muted = true;
+      videoPlayer.play().catch(() => {});
+    });
   }
 }
 

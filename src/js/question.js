@@ -8,17 +8,17 @@ const questions = [
     id: 0,
     type: 'choice',
     emoji: '🎨',
-    question: "What's your favorite color?",
-    choices: ['Pink 💗', 'Blue 💙', 'Purple 💜', 'Yellow 💛'],
-    funFact: "Mine is blue  — maybe that's why I am so calm and cool 😎💙"
+    question: "What kind of vibe do you like the most?",
+    choices: ['Cozy & quiet 🧸', 'Fun & chaotic 😂', 'Calm & peaceful 🌿', 'Depends on the day 😌'],
+    funFact: "I love Fun & chaotic 😂 — life's too short to be serious all the time. But I also love cozy nights in 🧸"
   },
   {
     id: 1,
     type: 'choice',
     emoji: '🌙',
-    question: 'Are you a morning person or night owl?',
-    choices: ['Early Bird 🌅', 'Night Owl 🦉', 'Depends on the day 😴', 'I literally never sleep 👀'],
-    funFact: "I'm a night owl too 🦉 — best conversations happen past midnight ngl"
+    question: 'What do you usually do when you finally get some free time?',
+    choices: ['Watch Something', 'Listen to Music', 'Sleep 😴', 'Go Somewhere'],
+    funFact: "I usually listen to music or watch something 🎶📺 — but if I'm with someone I like, I just wanna chill and vibe 😌"
   },
   {
     id: 2,
@@ -26,23 +26,23 @@ const questions = [
     emoji: '🍜',
     question: "What's your go-to comfort food when you're having a bad day?",
     placeholder: 'Type your answer here...',
-    funFact: "Mine is Pizza 🍕 — it's like a warm hug in food form. We should get some together sometime! 😄"
+    funFact: "Mine is pizza and monster energy 😅 — because sometimes you just need a little pick-me-up"
   },
   {
     id: 3,
     type: 'choice',
     emoji: '🎬',
-    question: 'Pick a movie genre for movie night!',
-    choices: ['Romance 💕', 'Comedy 😂', 'Horror 👻', 'Animation 🎞️'],
-    funFact: "I'd pick romance or comedy 😄 — life's too short for sad movies... unless we're watching together 👀"
+    question: 'If we had nothing to do for a few hours, what sounds the most fun?',
+    choices: ['Watch a movie 🎬', 'Go somewhere random 🚶‍♀️', 'Play games 🎮', 'Just talk ☕'],
+    funFact: "For me I would play games that I like but if my special someone is with me, I just wanna listen everything that she wants to say"
   },
   {
     id: 4,
     type: 'choice',
     emoji: '✈️',
-    question: 'Dream travel destination?',
-    choices: ['Paris 🗼', 'Tokyo 🗾', 'Maldives 🏝️', 'New York 🗽'],
-    funFact: "Tokyo is my dream too 🗾 — imagine exploring it together though 👀✨"
+    question: 'If you could randomly travel somewhere tomorrow, where would you go?',
+    choices: ['Somewhere in Japan 🇯🇵', 'Another country 🌏', 'Somewhere with a beach 🏝️', 'Somewhere quiet & pretty 🌿'],
+    funFact: "I wanna travel to somewhere quiet & pretty 🌿 — just to chill and vibing"
   },
   {
     id: 5,
@@ -50,14 +50,14 @@ const questions = [
     emoji: '💬',
     question: "What's one thing that always makes you smile no matter what?",
     placeholder: 'Tell me...',
-    funFact: "For me it's random good morning texts from someone I care about 💙 small things hit different"
+    funFact: "For me , I just need to see my special someone smile and I will be happy for the rest of the day 💙"
   },
   {
     id: 6,
     type: 'choice',
     emoji: '💫',
-    question: 'Your love language?',
-    choices: ['Quality Time ⏰', 'Words of Affirmation 💌', 'Acts of Service 🤝', 'Physical Touch 🤗'],
+    question: 'What makes you feel appreciated the most?',
+    choices: ['Someone remembering little things 🫶', 'Spending time together ⏰', 'Getting a small surprise 🎁', 'Someone helping you out 🤝'],
     funFact: "Mine is quality time ⏰ — I just love being around people I genuinely like. no phones, just vibes 💙"
   },
   {
@@ -72,15 +72,15 @@ const questions = [
     id: 8,
     type: 'type',
     emoji: '🤔',
-    question: "Okay real talk — what's your honest first impression of me? 👀",
+    question: "What's something you think I'd be surprisingly good at?",
     placeholder: "Be honest, I can take it 😅",
-    funFact: "My first impression of you? Genuinely thought you were really cool. Still do. Maybe even more now 💙"
+    funFact: "But for me , you are already good at everything you do and about your maturity and your personality. I think you are good at everything you do and I really admire you for that 💙"
   },
   {
     id: 9,
     type: 'askout',
     emoji: '💌',
-    question: "Last question... and it's a big one 👀",
+    question: "Last question... and this one is different 👀",
     funFact: ''
   }
 ];
@@ -262,9 +262,9 @@ function startAskOut() {
 
   const lines = [
     { delay: 0,    text: "Okay so... I've been building up to this 😅", cls: 'askout-line' },
-    { delay: 1200, text: "We've only known each other for a few months...", cls: 'askout-line' },
-    { delay: 2600, text: "But honestly you've been on my mind a lot ", cls: 'askout-line' },
-    { delay: 4000, text: "So I just wanted to ask you something...", cls: 'askout-line big' },
+    { delay: 1200, text: "I've been asked you out lately and got rejected but still you are my favorite person and I really like you", cls: 'askout-line' },
+    { delay: 2600, text: "And lately you've been on my mind a lot ", cls: 'askout-line' },
+    { delay: 4000, text: "So I just wanted to ask you something... but You can stop here if you want but if you wanna see something special...", cls: 'askout-line big' },
   ];
 
   lines.forEach(({ delay, text, cls }) => {
